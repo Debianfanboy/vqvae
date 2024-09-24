@@ -4,6 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 import argparse
 import utils
+import loader
 from models.vqvae import VQVAE
 
 parser = argparse.ArgumentParser()
@@ -40,8 +41,7 @@ if args.save:
 Load data and define batch data loaders
 """
 
-training_data, validation_data, training_loader, validation_loader, x_train_var = utils.load_data_and_data_loaders(
-    args.dataset, args.batch_size)
+training_data, validation_data, training_loader, validation_loader, x_train_var = loader.DataLoader
 """
 Set up VQ-VAE model with components defined in ./models/ folder
 """
