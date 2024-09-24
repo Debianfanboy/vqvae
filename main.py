@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import argparse
-import utils
+# import utils
 import loader
 from models.vqvae import VQVAE
 
@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 """
 Hyperparameters
 """
-timestamp = utils.readable_timestamp()
+timestamp = "Sometime around now"
 
 parser.add_argument("--batch_size", type=int, default=32)
 parser.add_argument("--n_updates", type=int, default=5000)
@@ -41,7 +41,16 @@ if args.save:
 Load data and define batch data loaders
 """
 
-training_data, validation_data, training_loader, validation_loader, x_train_var = loader.DataLoader
+# training_data, validation_data, training_loader, validation_loader, x_train_var = loader.DataLoader
+
+dataloader = loader.Loader("argon-preproc/data/")
+print("Trying to get training")
+training_loader = dataloader.get_train()
+print(training_loader)
+print("Supoosedly got training data")
+validation_loader = dataloader.get_val()
+x_train_var = dataloader.total_files
+assert x_train_var != 0
 """
 Set up VQ-VAE model with components defined in ./models/ folder
 """
